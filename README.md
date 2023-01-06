@@ -20,7 +20,7 @@ Hi! This is a project about showing an interactive Pokedex in a mobile version. 
 
 ## Limitations
 
-## 
+...
 
 ## Pokémon API
 
@@ -67,3 +67,5 @@ For this reason, if we want to get a list of Pokémons with their specific infor
 The huge amount of endpoint calls results in a **_serious performance issue_** for a good UX/UI experience.
 
 ## Demo
+
+...
