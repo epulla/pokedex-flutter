@@ -1,14 +1,12 @@
 class PokemonSprites {
-  final String backDefault;
-  final String frontDefault;
+  final String officialFrontDefault;
 
   const PokemonSprites({
-    required this.backDefault,
-    required this.frontDefault,
+    required this.officialFrontDefault,
   });
 
   @override
   String toString() {
-    return "PokemonSprites(backDefault=$backDefault,frontDefault=$frontDefault)";
+    return "PokemonSprites(homeFrontDefault=$officialFrontDefault)";
   }
 }

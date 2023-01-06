@@ -12,6 +12,7 @@ Pokemon parseToPokemon(Map<String, dynamic> json) {
     moves: parseToUrlDataList(json['moves'], subkey: 'move'),
     sprites: parseToPokemonSprites(json['sprites']),
     types: parseToUrlDataList(json['types'], subkey: 'type'),
+    stats: parseToUrlDataList(json['stats'], subkey: 'stat'),
   );
 }
 

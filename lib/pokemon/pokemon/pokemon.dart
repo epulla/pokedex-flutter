@@ -9,6 +9,7 @@ class Pokemon {
   final List<UrlData> moves;
   final PokemonSprites sprites;
   final List<UrlData> types;
+  final List<UrlData> stats;
 
   const Pokemon({
     required this.name,
@@ -18,10 +19,11 @@ class Pokemon {
     required this.moves,
     required this.sprites,
     required this.types,
+    required this.stats,
   });
 
   @override
   String toString() {
-    return "Pokemon(name=$name,height=$height,baseExperience=$baseExperience,moves=$moves,sprites=$sprites,types=$types)";
+    return "Pokemon(name=$name,height=$height,baseExperience=$baseExperience,moves=$moves,sprites=$sprites,types=$types,stats=$stats)";
   }
 }

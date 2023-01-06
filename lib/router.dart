@@ -13,7 +13,10 @@ final router = GoRouter(
           name: "pokemon-details",
           path: 'pokemon-details',
           builder: (context, state) {
-            return PokemonScreen(uri: state.queryParams['uri']!);
+            return PokemonScreen(
+              uri: state.queryParams['uri']!,
+              content: state.queryParams['content']!,
+            );
           },
         ),
       ],
