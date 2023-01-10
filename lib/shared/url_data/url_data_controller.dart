@@ -2,7 +2,7 @@ import 'package:fulltimeforce_test/shared/url_data/url_data.dart';
 
 UrlData parseToUrlData(Map<String, dynamic> json) {
   return UrlData(
-    name: json["name"],
+    name: json["name"] ?? "",
     url: json["url"],
   );
 }

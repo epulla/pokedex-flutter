@@ -19,19 +19,49 @@ class HomeScreen extends HookWidget {
   final String allPokemonsUri =
       "https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=0";
 
+  List<Widget> renderPrimaryTypes(List<dynamic> types, {int limit = 2}) {
+    List<Widget> elements = [];
+    int i = 0;
+    for (var type in types) {
+      if (i >= limit) {
+        break;
+      }
+      elements.add(
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(94, 255, 255, 255),
+            borderRadius: BorderRadius.circular(5),
+            shape: BoxShape.rectangle,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              capitalize(
+                type.name,
+              ),
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 10,
+              ),
+            ),
+          ),
+        ),
+      );
+      i++;
+    }
+    return elements;
+  }
+
   @override
   Widget build(BuildContext context) {
     final pagePokemonUri = useState(allPokemonsUri);
     final allPokemons = useState<dynamic>(null);
-    final allPokemonsFuture = fetchDataFuture(pagePokemonUri.value);
-    final allPokemonsSnapshot = useFuture(allPokemonsFuture, initialData: null);
 
     useEffect(() {
-      if (allPokemonsSnapshot.hasData) {
-        allPokemons.value = parseToPokemonAll(allPokemonsSnapshot.data);
-      }
+      fetchData(allPokemons, pagePokemonUri.value, parseToPokemonAll);
       return () {};
-    }, [allPokemonsSnapshot.data, pagePokemonUri.value]);
+    }, [allPokemons.value, pagePokemonUri.value]);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -85,16 +115,15 @@ class HomeScreen extends HookWidget {
                           return HookBuilder(
                             builder: (context) {
                               final pokemon = useState<dynamic>(null);
-                              final pokemonFuture = fetchDataFuture(uri);
-                              final pokemonSnapshot =
-                                  useFuture(pokemonFuture, initialData: null);
+                              final pokemonRawData = useState<dynamic>("");
                               useEffect(() {
-                                if (pokemonSnapshot.hasData) {
-                                  pokemon.value = parseToPokemonSimplified(
-                                      pokemonSnapshot.data);
+                                if (pokemon.value == null) {
+                                  fetchData(
+                                      pokemon, uri, parseToPokemonSimplified,
+                                      dataState: pokemonRawData);
                                 }
                                 return () {};
-                              }, [pokemonSnapshot.data]);
+                              }, [pokemon.value, allPokemons.value]);
                               if (pokemon.value == null) {
                                 return const Center(
                                   widthFactor: .3,
@@ -107,7 +136,7 @@ class HomeScreen extends HookWidget {
                                       .goNamed("pokemon-details", queryParams: {
                                     "uri": uri,
                                     "content":
-                                        json.encode(pokemonSnapshot.data),
+                                        json.encode(pokemonRawData.value),
                                   });
                                 },
                                 child: Card(
@@ -168,7 +197,7 @@ class HomeScreen extends HookWidget {
                                           child: Wrap(
                                             spacing: 5,
                                             direction: Axis.vertical,
-                                            children: getWidgetsOfPrimaryTypes(
+                                            children: renderPrimaryTypes(
                                                 pokemon.value.types),
                                           ),
                                         ),
@@ -226,37 +255,5 @@ class HomeScreen extends HookWidget {
         ),
       ]),
     );
-  }
-
-  List<Widget> getWidgetsOfPrimaryTypes(List<dynamic> types, {int limit = 2}) {
-    List<Widget> elements = [];
-    int i = 0;
-    for (var type in types) {
-      if (i >= limit) {
-        break;
-      }
-      elements.add(DecoratedBox(
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(94, 255, 255, 255),
-          borderRadius: BorderRadius.circular(5),
-          shape: BoxShape.rectangle,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Text(
-            capitalize(
-              type.name,
-            ),
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 10,
-            ),
-          ),
-        ),
-      ));
-      i++;
-    }
-    return elements;
   }
 }
