@@ -32,6 +32,7 @@ For every step, you can use the links from above (at [Requirements](#requirement
 4. Please, follow the [instructions](https://docs.flutter.dev/get-started/editor?tab=vscode) for setting up Flutter using VSCode. You need to install Flutter and Dart plugins.
 5. Open your simulated device available at the bottom of the VSCode window:
 ![VSCode Available Devices](https://docs.flutter.dev/assets/images/docs/tools/vs-code/device_status_bar.png)
+
 If you don't have one, you can create a Device simulator:
 ![Device Simulator Creation](./images/available_devices.png)
 
