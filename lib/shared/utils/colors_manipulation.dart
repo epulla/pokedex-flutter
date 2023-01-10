@@ -26,6 +26,8 @@ Color getTypeColor(String type) {
       return Colors.grey;
     case "poison":
       return Colors.purple;
+    case "psychic":
+      return Color.fromARGB(255, 233, 30, 169);
     default:
       return Colors.white;
   }
