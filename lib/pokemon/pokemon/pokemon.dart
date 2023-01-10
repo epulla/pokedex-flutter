@@ -1,4 +1,5 @@
 import 'package:fulltimeforce_test/pokemon/pokemon_sprites/pokemon_sprites.dart';
+import 'package:fulltimeforce_test/pokemon/pokemon_stat/pokemon_stat.dart';
 import 'package:fulltimeforce_test/shared/url_data/url_data.dart';
 
 class Pokemon {
@@ -9,7 +10,8 @@ class Pokemon {
   final List<UrlData> moves;
   final PokemonSprites sprites;
   final List<UrlData> types;
-  final List<UrlData> stats;
+  final List<PokemonStat> stats;
+  final UrlData specie;
 
   const Pokemon({
     required this.name,
@@ -20,10 +22,11 @@ class Pokemon {
     required this.sprites,
     required this.types,
     required this.stats,
+    required this.specie,
   });
 
   @override
   String toString() {
-    return "Pokemon(name=$name,height=$height,baseExperience=$baseExperience,moves=$moves,sprites=$sprites,types=$types,stats=$stats)";
+    return "Pokemon(name=$name,height=$height,baseExperience=$baseExperience,moves=$moves,sprites=$sprites,types=$types,stats=$stats,specie=$specie)";
   }
 }
