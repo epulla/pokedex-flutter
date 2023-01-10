@@ -1,7 +1,5 @@
 # Pokedex!
 
-## ATENTION: This Readme is still _incomplete_. More information will be added in the next few days.
-
 ## Documentation
 
 - [Introduction](#introduction)
